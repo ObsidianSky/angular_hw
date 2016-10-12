@@ -1,0 +1,69 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Registration form</div>
+    <div class="panel-body">
+        <form name="registration.form" class="form" novalidate>
+            <!--<div class="row">-->
+                <!--<div class="form-group col-xs-12 col-sm-6" validate>-->
+                    <!--<label class="control-label" for="inputPassword1">Password</label>-->
+                    <!--<input type="password" name="password1" class="form-control" id="inputPassword1" placeholder="Password" ng-model="user.password" ng-required="true">-->
+                    <!--<span class="help-block error-required">Password is required</span>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-sm-6" validate>-->
+                    <!--<label class="control-label" for="inputPassword2">Password confirmation</label>-->
+                    <!--<input type="password" name="password2" class="form-control" id="inputPassword2" placeholder="Password again" ng-model="user.passwordConfirmation" ng-required="true" compare-to="user.password">-->
+                    <!--<span class="help-block error-required">Password confirmation is required</span>-->
+                    <!--<span class="help-block error-compare-to">Passwords must match</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="form-group col-xs-12 col-sm-6" validate>-->
+                    <!--<label class="control-label" for="inputCountry">Country</label>-->
+                    <!--<select class="form-control" name="country" id="inputCountry" ng-model="user.country" ng-required="true">-->
+                        <!--<option ng-repeat="country in form.countries" value="{{country}}">{{country}}</option>-->
+                    <!--</select>-->
+                    <!--<span class="help-block error-required">Country is required</span>-->
+                <!--</div>-->
+                <!--<div class="form-group col-xs-12 col-sm-6" validate>-->
+                    <!--<label class="control-label" for="inputPostalIndex">Postal index</label>-->
+                    <!--<input type="number" name="postalIndex" ng-minlength="4" ng-maxlength="6" class="form-control" id="inputPostalIndex" placeholder="Postal index" ng-model="user.postalIndex" ng-required="true">-->
+                    <!--<span class="help-block error-required">Postal index is required</span>-->
+                    <!--<span class="help-block error-minlength">Minimal length is 4</span>-->
+                    <!--<span class="help-block error-maxlength">Maximal length is 6</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<div class="form-group col-xs-12" validate>-->
+                    <!--<label class="control-label" for="inputBirthday">Birthday</label>-->
+                    <!--<input type="text" ng-pattern="/^([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})$/" name="birthday" class="form-control" id="inputBirthday" placeholder="dd.mm.yyyy" ng-model="user.birthday" ng-required="true">-->
+                    <!--<span class="help-block error-required">Birthday is requried</span>-->
+                    <!--<span class="help-block error-pattern">Birthday is not valid</span>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="text-center">
+                <div class="form-group" ng-class="{'has-error': registration.form.name.$invalid && registration.form.name.$touched, 'has-success': registration.form.name.$valid}">
+                    <label class="control-label" for="inputName">Name</label>
+                    <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" ng-model="user.name" ng-minlength="6" ng-required="true">
+                    <span class="help-block" ng-show="registration.form.name.$touched && registration.form.name.$error.required">Name is required</span>
+                    <span class="help-block" ng-show="registration.form.name.$touched && registration.form.name.$error.minlength">Minimal length is 6</span>
+                </div>
+                <!--TODO check with server-->
+                <div class="form-group" ng-class="{'has-error': registration.form.email.$invalid && registration.form.email.$touched, 'has-success': registration.form.email.$valid}">
+                    <label class="control-label" for="inputEmail">Email address</label>
+                    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" ng-model="user.email" ng-blur="registration.checkUnique(registration.form.email)" ng-required="true">
+                    <span class="help-block" ng-show="registration.form.email.$touched && registration.form.email.$error.required">Email is required</span>
+                    <span class="help-block" ng-show="registration.form.email.$touched && registration.form.email.$error.email">Email is not valid</span>
+                    <span class="help-block" ng-show="registration.form.email.$error.notUnique">Email is already used, choose another</span>
+                </div>
+                <div class="checkbox">
+                    <label class="control-label">
+                        <input type="checkbox" name="" ng-model="user.agreed"> I want receive spam on my
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-default" ng-class="registration.form.$invalid ? 'btn-default' : 'btn-success'" ng-disabled="registration.form.$invalid">Submit</button>
+            </div>
+        </form>
+
+        <pre>{{ registration.form | json }}</pre>
+    </div>
+</div>
